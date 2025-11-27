@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CoLab.com - Profile</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #111; 
+        }
+
+        .app-wrapper {
+            border: 12px solid #111; 
+            background: #63b9d4;     
+            min-height: 100vh;
+        }
+
+        .header {
+            background: #111;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 18px 32px;
+        }
+
+        .site-title {
+            font-size: 46px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            cursor: pointer;
+        }
+
+        .search-box {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+
+        .search-box input[type="text"] {
+            width: 320px;
+            padding: 8px 12px;
+            border: 2px solid white;
+            background: #000;
+            color: #fff;
+            font-size: 18px;
+        }
+
+        .search-box input::placeholder {
+            color: #cccccc;
+        }
+
+        .hamburger-wrapper {
+            background: #e6e6e6;
+            padding: 6px 8px;
+            cursor: pointer;
+        }
+
+        .hamburger {
+            width: 32px;
+            height: 24px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .hamburger span {
+            display: block;
+            height: 4px;
+            background: #000;
+            border-radius: 2px;
+        }
+
+        .main {
+            display: grid;
+            grid-template-columns: 260px 1fr 320px;
+            gap: 30px;
+            padding: 35px;
+        }
+
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            margin-top: 20px;
+        }
+
+        .menu-item {
+            background: #000;
+            color: #fff;
+            border: 2px solid #000;
+            padding: 10px 14px;
+            font-size: 20px;
+            text-align: left;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .menu-item span.label {
+            flex: 1;
+        }
+
+        .menu-item span.arrow-box {
+            width: 24px;
+            height: 22px;
+            border-left: 2px solid #63b9d4;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+        }
+
+        .content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .section-title {
+            font-size: 44px;
+            font-weight: bold;
+            margin: 0 0 10px 0;
+        }
+
+        .card {
+            background: #e6e6e6;
+            padding: 22px 28px;
+            font-size: 20px;
+            width: 360px;
+            border-radius: 4px;
+        }
+
+        .profile-section {
+            background: #e6e6e6;
+            padding: 25px;
+            width: 100%;
+            max-width: 600px;
+            border-radius: 4px;
+        }
+
+        .profile-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .profile-avatar {
+            width: 80px;
+            height: 80px;
+            background: #63b9d4;
+            border-radius: 50%;
+            margin-right: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            color: white;
+            font-weight: bold;
+        }
+
+        .profile-info h2 {
+            margin: 0 0 5px 0;
+            font-size: 28px;
+        }
+
+        .profile-info p {
+            margin: 0;
+            color: #555;
+        }
+
+        .profile-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .detail-item {
+            margin-bottom: 12px;
+        }
+
+        .detail-label {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 4px;
+        }
+
+        .detail-value {
+            color: #555;
+        }
+
+        .messages {
+            background: #e6e6e6;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            min-height: 430px;
+            border-radius: 4px;
+        }
+
+        .messages-title {
+            font-size: 40px;
+            margin: 0 0 10px 0;
+            align-self: flex-start;
+        }
+
+        .message-list {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        .message-item {
+            background: white;
+            padding: 12px 15px;
+            border-radius: 4px;
+            border-left: 4px solid #63b9d4;
+        }
+
+        .message-sender {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .message-preview {
+            color: #555;
+            font-size: 14px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        @media (max-width: 1050px) {
+            .main {
+                grid-template-columns: 1fr;
+            }
+
+            .messages {
+                min-height: 260px;
+            }
+
+            .sidebar {
+                margin-top: 0;
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+
+            .menu-item {
+                flex: 1 1 45%;
+            }
+
+            .content {
+                order: -1; 
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="app-wrapper">
+        <header class="header">
+            <div class="site-title" onclick="navigateTo('index.html')">CoLab.com</div>
+
+            <div class="search-box">
+                <input type="text" placeholder="Search..." />
+            </div>
+
+            <div class="hamburger-wrapper" onclick="navigateTo('student.html')">
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </header>
+
+        <main class="main">
+            <aside class="sidebar">
+                <button class="menu-item">
+                    <span class="label">Student/Company Profile</span>
+                    <span class="arrow-box">▼</span>
+                </button>
+
+                <button class="menu-item">
+                    <span class="label">Account Settings</span>
+                    <span class="arrow-box">▼</span>
+                </button>
+
+                <button class="menu-item">
+                    <span class="label">Privacy</span>
+                    <span class="arrow-box">▼</span>
+                </button>
+
+                <button class="menu-item">
+                    <span class="label">Project List</span>
+                    <span class="arrow-box">▼</span>
+                </button>
+
+                <button class="menu-item">
+                    <span class="label">Payments</span>
+                    <span class="arrow-box">▼</span>
+                </button>
+
+                <button class="menu-item">
+                    <span class="label">Help</span>
+                    <span class="arrow-box">▼</span>
+                </button>
+
+                <button class="menu-item">
+                    <span class="label">Tutorial</span>
+                    <span class="arrow-box">▼</span>
+                </button>
+            </aside>
+
+            <section class="content">
+                <h1 class="section-title">About Me</h1>
+                
+                <div class="profile-section">
+                    <div class="profile-header">
+                        <div class="profile-avatar">JS</div>
+                        <div class="profile-info">
+                            <h2>John Doe</h2>
+                            <p>Computer Science Student | UI/UX Designer</p>
+                        </div>
+                    </div>
+                    
+                    <div class="profile-details">
+                        <div class="detail-item">
+                            <div class="detail-label">Education</div>
+                            <div class="detail-value">Texas Tech University, Computer Science (Year 2)</div>
+                        </div>
+                        
+                        <div class="detail-item">
+                            <div class="detail-label">Skills</div>
+                            <div class="detail-value">JavaScript, Python</div>
+                        </div>
+                        
+                        <div class="detail-item">
+                            <div class="detail-label">Location</div>
+                            <div class="detail-value">Lubbuck, Tx</div>
+                        </div>
+                        
+                        <div class="detail-item">
+                            <div class="detail-label">Interests</div>
+                            <div class="detail-value">Web Development, Graphic Design, Photography</div>
+                        </div>
+                        
+                        <div class="detail-item">
+                            <div class="detail-label">Availability</div>
+                            <div class="detail-value">Part-time (15-20 hrs/week)</div>
+                        </div>
+                        
+                        <div class="detail-item">
+                            <div class="detail-label">Joined</div>
+                            <div class="detail-value">November 2025</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card">Current Projects</div>
+                <div class="card">Completed Projects</div>
+            </section>
+
+            <aside class="messages">
+                <h2 class="messages-title">Messages</h2>
+                <div class="message-list">
+                    <div class="message-item">
+                        <div class="message-sender">Company 1</div>
+                        <div class="message-preview">We'd like to discuss your internship application...</div>
+                    </div>
+                    <div class="message-item">
+                        <div class="message-sender">Company 2</div>
+                        <div class="message-preview">Your portfolio looks great! Let's schedule a call...</div>
+                    </div>
+                    <div class="message-item">
+                        <div class="message-sender">Company 3</div>
+                        <div class="message-preview">We're interested in your web development skills...</div>
+                    </div>
+                    <div class="message-item">
+                        <div class="message-sender">Company 4</div>
+                        <div class="message-preview">Upcoming career fair on November 30th...</div>
+                    </div>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <script>
+        function navigateTo(page) {
+            window.location.href = page;
+        }
+    </script>
+</body>
+</html>

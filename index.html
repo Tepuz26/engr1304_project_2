@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CoLab.com - Home</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #62C3E4;
+            color: white;
+            min-height: 100vh;
+        }
+
+        /* Top bar */
+        .topbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 30px;
+            background: #0D0D0D;
+            color: white;
+        }
+
+        .logo {
+            font-size: 38px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /* Search area */
+        .search-box input {
+            width: 180px;
+            padding: 6px 10px;
+            font-size: 18px;
+            color: white;
+            background: #222;
+            border: 2px solid white;
+            border-radius: 4px;
+            outline: none;
+        }
+
+        /* Sign in button */
+        .signin {
+            background: black;
+            color: white;
+            border: 2px solid white;
+            padding: 6px 14px;
+            font-size: 20px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        /* Container for the two big boxes */
+        .panel-wrapper {
+            margin-top: 50px;
+            display: flex;
+            justify-content: center;
+            gap: 120px;
+        }
+
+        /* Panel links */
+        .panel-link {
+            text-decoration: none;
+            display: block;
+        }
+
+        /* Each box */
+        .panel {
+            width: 330px;
+            height: 420px;
+            background: #0E0E0E;
+            border: 10px solid #62C3E4;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding-top: 25px;
+            cursor: pointer;
+            transition: transform 0.2s ease, border-color 0.2s ease;
+        }
+
+        .panel:hover {
+            transform: translateY(-5px);
+            border-color: #ffffff;
+        }
+
+        .panel h2 {
+            color: white;
+            font-size: 28px;
+            margin-bottom: 25px;
+        }
+
+        /* White icons */
+        .icon {
+            width: 230px;
+            height: auto;
+        }
+
+        /* Student icon */
+        .user-icon {
+            fill: white;
+        }
+
+        /* Building icon */
+        .building-icon {
+            fill: white;
+        }
+    </style>
+</head>
+<body>
+    <header class="topbar">
+        <div class="logo" onclick="navigateTo('index.html')">CoLab.com</div>
+        <div class="search-box">
+            <input type="text" placeholder="Search...">
+        </div>
+        <button class="signin">Sign in/Up</button>
+    </header>
+
+    <main class="panel-wrapper">
+        <!-- Clickable Student Panel -->
+        <div class="panel-link" onclick="navigateTo('student.html')">
+            <div class="panel">
+                <h2>Students</h2>
+                <svg class="icon user-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="50" cy="32" r="22"/>
+                    <rect x="18" y="58" width="64" height="35" rx="18"/>
+                </svg>
+            </div>
+        </div>
+
+        <!-- Clickable Companies Panel -->
+        <div class="panel-link" onclick="navigateTo('company.html')">
+            <div class="panel">
+                <h2>Companies</h2>
+                <svg class="icon building-icon" xmlns="http://www.w3.org/2000/svg" width="90" height="90" viewBox="0 0 90 90">
+                    <!-- Left building (taller) -->
+                    <rect x="8" y="25" width="20" height="55" fill="white" stroke="black" stroke-width="2"/>
+                    <rect x="13" y="32" width="6" height="6" fill="black"/>
+                    <rect x="13" y="43" width="6" height="6" fill="black"/>
+                    <rect x="13" y="54" width="6" height="6" fill="black"/>
+                    <rect x="13" y="65" width="6" height="6" fill="black"/>
+
+                    <!-- Middle building (tallest) -->
+                    <rect x="35" y="10" width="22" height="70" fill="white" stroke="black" stroke-width="2"/>
+                    <rect x="41" y="18" width="7" height="7" fill="black"/>
+                    <rect x="41" y="30" width="7" height="7" fill="black"/>
+                    <rect x="41" y="42" width="7" height="7" fill="black"/>
+                    <rect x="41" y="54" width="7" height="7" fill="black"/>
+                    <rect x="41" y="66" width="7" height="7" fill="black"/>
+
+                    <!-- Right building (taller) -->
+                    <rect x="64" y="22" width="20" height="58" fill="white" stroke="black" stroke-width="2"/>
+                    <rect x="69" y="30" width="6" height="6" fill="black"/>
+                    <rect x="69" y="41" width="6" height="6" fill="black"/>
+                    <rect x="69" y="52" width="6" height="6" fill="black"/>
+                    <rect x="69" y="63" width="6" height="6" fill="black"/>
+                </svg>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function navigateTo(page) {
+            window.location.href = page;
+        }
+    </script>
+</body>
+</html>
